@@ -3,7 +3,7 @@ const faq = [
 {
 question:"How can I get my SSS Number?",
 keywords:["sss number","get sss","sss registration","register sss"],
-answer:"You may register through the SSS website: https://www.sss.gov.ph"
+answer:"You may register through the SSS website: <a href='https://www.sss.gov.ph' target='_blank'>https://www.sss.gov.ph</a>"
 },
 
 {
@@ -154,6 +154,28 @@ answer:"No. Loan deduction schedules cannot be changed."
 question:"Can loan deductions be made every payout?",
 keywords:["loan deductions","every payout","every cutoff","loan every cutoff"],
 answer:"No. SSS and Pag-IBIG loan payments are deducted only once per month."
+},
+
+{
+question:"Q:When does TTEC HMO coverage start?",
+keywords:["HMO start","coverage","benefits"],
+answer:"TTEC provides a company-paid HMO plan after one month of tenure for full-time and regular part-time employees aged 18 to 65. TTEC covers 100% of the employee's HMO premium."
+},
+
+{
+question:"Can I add dependents to my TTEC HMO Plan?",
+keywords:["hmo dependents","dependents","dependent","hmo plan"],
+answer:"After two months of tenure, you may enroll eligible dependents in the Company HMO Plan. TTEC covers a portion of the premium for the first three eligible dependents enrolled. Learn more here: https://teletechinc.sharepoint.com/teams/Health_and_Wellness/SitePages/Philippines-All.aspx"
+},
+
+{
+question:"Who is TTEC's HMO provider?",
+keywords:[
+"hmo provider",
+"philcare provider",
+"medical insurance provider"
+],
+answer:"TTEC's HMO provider is PhilCare."
 },
 
 {
