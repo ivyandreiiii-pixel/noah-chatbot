@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NOAH - New Hire Assistant</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:15px;
+}
+
+.chat-container{
+    width:100%;
+    max-width:450px;
+    height:90vh;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    display:flex;
+    flex-direction:column;
+}
+
+.header{
+    background:linear-gradient(135deg,#0066cc,#0099ff);
+    color:white;
+    text-align:center;
+    padding:15px;
+}
+
+.header h2{
+    margin-bottom:5px;
+}
+
+.chatbox{
+    flex:1;
+    overflow-y:auto;
+    padding:15px;
+    background:#f7f9fc;
+}
+
+.bot-message{
+    background:#eaf3ff;
+    padding:12px;
+    border-radius:18px;
+    border-bottom-left-radius:5px;
+    margin-bottom:12px;
+    max-width:85%;
+}
+
+.user-message{
+    background:#d9f5d9;
+    padding:12px;
+    border-radius:18px;
+    border-bottom-right-radius:5px;
+    margin-bottom:12px;
+    margin-left:auto;
+    max-width:85%;
+}
+
+.timestamp{
+    margin-top:5px;
+    font-size:10px;
+    color:#777;
+}
+
+.suggested{
+    padding:10px;
+    background:white;
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+    overflow-x:auto;
+    white-space:nowrap;
+}
+
+.suggested button{
+    margin:3px;
+    padding:8px 12px;
+    border:none;
+    border-radius:20px;
+    background:#eef5ff;
+    color:#0066cc;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.suggested button:hover{
+    background:#0066cc;
+    color:white;
+}
+
+.typing{
+    display:none;
+    background:#eaf3ff;
+    padding:12px;
+    border-radius:18px;
+    width:fit-content;
+    margin-bottom:12px;
+}
+
+.input-area{
+    display:flex;
+    padding:10px;
+    background:white;
+}
+
+.input-area input{
+    flex:1;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:30px;
+    font-size:14px;
+}
+
+.input-area input:focus{
+    outline:none;
+    border-color:#0066cc;
+}
+
+.send-btn{
+    width:50px;
+    height:50px;
+    margin-left:8px;
+    border:none;
+    border-radius:50%;
+    background:#0066cc;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.footer{
+    text-align:center;
+    font-size:11px;
+    color:#666;
+    padding:10px;
+    border-top:1px solid #eee;
+}
+
+@media(max-width:600px){
+
+.chat-container{
+    width:100%;
+    height:95vh;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="chat-container">
+
+<div class="header">
+<h2>🤖 NOAH</h2>
+<p>New Hire Assistant</p>
+</div>
+
+<div id="chatbox" class="chatbox">
+
+<div class="bot-message">
+
+🤖 Hello! I'm NOAH.
+
+<div class="timestamp">
+Ready to help
+</div>
+
+</div>
+
+<div id="typing" class="typing">
+🤖 NOAH is typing...
+</div>
+
+</div>
+
+<div class="suggested">
+
+<button onclick="askQuestion('How do I register for SSS online?')">
+SSS Registration
+</button>
+
+<button onclick="askQuestion('How do I register for PhilHealth online?')">
+PhilHealth
+</button>
+
+<button onclick="askQuestion('How do I register for Pag-IBIG online?')">
+Pag-IBIG
+</button>
+
+<button onclick="askQuestion('What temporary payroll accounts are accepted?')">
+Payroll
+</button>
+
+<button onclick="askQuestion('Do I need to declare my active SSS and Pag-IBIG loans?')">
+Loans
+</button>
+
+</div>
+
+<div class="input-area">
+
+<input
+id="userInput"
+placeholder="Ask NOAH anything..."
+onkeydown="if(event.key==='Enter'){sendMessage();}"
+>
+
+<button class="send-btn" onclick="sendMessage()">
+➤
+</button>
+
+</div>
+
+<div class="footer">
+New Hire Onboarding Assistant Hub © 2026 | Powered by Ivy Andrea Frogosa
+</div>
+
+</div>
+
+<script src="faqs.js"></script>
+
+<script>
+
+function getTime(){
+
+return new Date().toLocaleTimeString([],{
+hour:'2-digit',
+minute:'2-digit'
+});
+
+}
+
+function askQuestion(question){
+
+document.getElementById("userInput").value =
+question;
+
+sendMessage();
+
+}
+
+function sendMessage(){
+
+const input =
+document.getElementById("userInput");
+
+const question =
+input.value.trim();
+
+if(question==="") return;
+
+addUser(question);
+
+showTyping();
+
+setTimeout(function(){
+
+const answer =
+searchFAQ(question);
+
+hideTyping();
+
+addBot(answer);
+
+},700);
+
+input.value="";
+
+}
+
+function searchFAQ(userQuestion){
+
+const search =
+userQuestion.toLowerCase();
+
+for(const item of faq){
+
+if(
+item.question &&
+item.question.toLowerCase() === search
+){
+return item.answer;
+}
+
+if(item.keywords){
+
+for(const keyword of item.keywords){
+
+if(
+search.includes(
+keyword.toLowerCase()
+)
+){
+return item.answer;
+}
+
+}
+}
+
+}
+
+return "Sorry, I couldn't find an answer. Please contact the onboarding team for assistance.";
+
+}
+
+function addUser(message){
+
+const chatbox =
+document.getElementById("chatbox");
+
+chatbox.innerHTML += `
+<div class="user-message">
+${message}
+<div class="timestamp">${getTime()}</div>
+</div>
+`;
+
+scrollBottom();
+
+}
+
+function addBot(message){
+
+const chatbox =
+document.getElementById("chatbox");
+
+chatbox.innerHTML += `
+<div class="bot-message">
+${message}
+<div class="timestamp">${getTime()}</div>
+</div>
+`;
+
+scrollBottom();
+
+}
+
+function showTyping(){
+
+document.getElementById("typing").style.display =
+"block";
+
+scrollBottom();
+
+}
+
+function hideTyping(){
+
+document.getElementById("typing").style.display =
+"none";
+
+}
+
+function scrollBottom(){
+
+const chatbox =
+document.getElementById("chatbox");
+
+chatbox.scrollTop =
+chatbox.scrollHeight;
+
+}
+
+</script>
+
+</body>
+</html>
