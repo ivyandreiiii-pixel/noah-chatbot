@@ -159,7 +159,6 @@ answer:"No. SSS and Pag-IBIG loan payments are deducted only once per month."
 {
 question:"When does TTEC HMO coverage start?",
 keywords:[
-"hmo",
 "start hmo",
 "hmo start",
 "hmo coverage",
