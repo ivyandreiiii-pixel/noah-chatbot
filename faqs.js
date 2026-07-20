@@ -157,23 +157,45 @@ answer:"No. SSS and Pag-IBIG loan payments are deducted only once per month."
 },
 
 {
-question:"Q:When does TTEC HMO coverage start?",
-keywords:["HMO start","coverage","benefits"],
+question:"When does TTEC HMO coverage start?",
+keywords:[
+"hmo",
+"start hmo",
+"hmo start",
+"hmo coverage",
+"when can i start hmo",
+"when does hmo start",
+"ttec hmo",
+"hmo benefits"
+],
 answer:"TTEC provides a company-paid HMO plan after one month of tenure for full-time and regular part-time employees aged 18 to 65. TTEC covers 100% of the employee's HMO premium."
 },
 
 {
 question:"Can I add dependents to my TTEC HMO Plan?",
-keywords:["hmo dependents","dependents","dependent","hmo plan"],
-answer:"After two months of tenure, you may enroll eligible dependents in the Company HMO Plan. TTEC covers a portion of the premium for the first three eligible dependents enrolled. Learn more here: https://teletechinc.sharepoint.com/teams/Health_and_Wellness/SitePages/Philippines-All.aspx"
+keywords:[
+"add dependent",
+"add dependents",
+"hmo dependent",
+"hmo dependents",
+"dependents",
+"dependent",
+"ttec hmo",
+"hmo plan",
+"can i add dependents",
+"dependent enrollment"
+],
+answer:"Yes. After two months of tenure, you may enroll eligible dependents in the Company HMO Plan. TTEC covers a portion of the premium for the first three eligible dependents enrolled."
 },
 
 {
-question:"Who is TTEC's HMO provider?",
+question:"What is TTEC HMO?",
 keywords:[
-"hmo provider",
-"philcare provider",
-"medical insurance provider"
+"ttec hmo",
+"hmo",
+"philcare",
+"healthcard",
+"hmo provider"
 ],
 answer:"TTEC's HMO provider is PhilCare."
 },
