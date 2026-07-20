@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>NOAH - New Hire Assistant</title>
 
 <style>
@@ -31,7 +30,7 @@ body{
     background:white;
     border-radius:20px;
     overflow:hidden;
-    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
     display:flex;
     flex-direction:column;
 }
@@ -162,7 +161,6 @@ body{
 }
 
 </style>
-
 </head>
 
 <body>
@@ -258,6 +256,27 @@ sendMessage();
 
 }
 
+/* GOOGLE SHEET LOGGING */
+
+function logQuestion(question){
+
+fetch(
+"https://script.google.com/macros/s/AKfycbzkaMPcvBIGDzw-rJKeSR7-COUtvaD5DEtLuoy8dV7mlL4rASRPagFpbJq6R0MLlZ3kUg/exec",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+question:question
+})
+}
+)
+.then(response => console.log("Question Logged"))
+.catch(error => console.log(error));
+
+}
+
 function sendMessage(){
 
 const input =
@@ -269,6 +288,9 @@ input.value.trim();
 if(question==="") return;
 
 addUser(question);
+
+/* SAVE TO GOOGLE SHEET */
+logQuestion(question);
 
 showTyping();
 
@@ -314,6 +336,7 @@ return item.answer;
 }
 
 }
+
 }
 
 }
