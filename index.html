@@ -260,20 +260,21 @@ sendMessage();
 
 function logQuestion(question){
 
-fetch(
-"https://script.google.com/macros/s/AKfycbzkaMPcvBIGDzw-rJKeSR7-COUtvaD5DEtLuoy8dV7mlL4rASRPagFpbJq6R0MLlZ3kUg/exec",
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-question:question
-})
-}
-)
-.then(response => console.log("Question Logged"))
-.catch(error => console.log(error));
+  fetch(
+    "https://script.google.com/macros/s/AKfycbzkaMPcvBIGDzw-rJKeSR7-COUtvaD5DEtLuoy8dV7mlL4rASRPagFpbJq6R0MLlZ3kUg/exec",
+    {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        question: question
+      })
+    }
+  )
+  .then(() => console.log("Question Logged"))
+  .catch(error => console.log(error));
 
 }
 
