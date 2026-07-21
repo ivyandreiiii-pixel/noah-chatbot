@@ -258,7 +258,7 @@ sendMessage();
 
 /* GOOGLE SHEET LOGGING */
 
-function logQuestion(question){
+function logQuestion(question, answer){
 
   fetch(
     "https://script.google.com/macros/s/AKfycbzkaMPcvBIGDzw-rJKeSR7-COUtvaD5DEtLuoy8dV7mlL4rASRPagFpbJq6R0MLlZ3kUg/exec",
@@ -269,44 +269,45 @@ function logQuestion(question){
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        question: question
+        question: question,
+        answer: answer
       })
     }
   )
-  .then(() => console.log("Question Logged"))
+  .then(() => console.log("Question and Answer Logged"))
   .catch(error => console.log(error));
 
 }
 
 function sendMessage(){
 
-const input =
-document.getElementById("userInput");
+    const input =
+    document.getElementById("userInput");
 
-const question =
-input.value.trim();
+    const question =
+    input.value.trim();
 
-if(question==="") return;
+    if(question === "") return;
 
-addUser(question);
+    addUser(question);
 
-/* SAVE TO GOOGLE SHEET */
-logQuestion(question);
+    showTyping();
 
-showTyping();
+    setTimeout(function(){
 
-setTimeout(function(){
+        const answer =
+        searchFAQ(question);
 
-const answer =
-searchFAQ(question);
+        hideTyping();
 
-hideTyping();
+        addBot(answer);
 
-addBot(answer);
+        // LOG QUESTION + ANSWER
+        logQuestion(question, answer);
 
-},700);
+    },700);
 
-input.value="";
+    input.value = "";
 
 }
 
